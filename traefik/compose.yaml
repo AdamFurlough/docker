@@ -1,0 +1,21 @@
+---
+services:
+  traefik:
+    image: traefik:latest
+    container_name: traefik
+    restart: unless-stopped
+    networks:
+      - proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./traefik.yaml:/etc/traefik/traefik.yml  # config file, doublecheck file ext (yaml external yml internal)
+      - ./acme.json:/acme.json
+    environment:
+      - TZ=US/UTC  # set to local timezone
+
+networks:
+  proxy:
+    external: true
