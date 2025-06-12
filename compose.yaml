@@ -1,0 +1,34 @@
+---
+# Create proxy network for use with traefik
+networks:
+  proxy:
+
+services:
+
+# Proxy
+  traefik:
+    extends:
+      file: traefik/compose.yaml
+      service: traefik
+
+# Container Management
+  portainer:
+    extends:
+      file: portainer/compose.yaml
+      service: portainer
+
+# Service Containers
+  filebrowser:
+    extends:
+      file: filebrowser/compose.yaml
+      service: filebrowser
+
+  ghostboard:
+    extends:
+      file: ghostboard/compose.yaml
+      service: ghostboard
+
+  ittools:
+    extends:
+      file: ittools/compose.yaml
+      service: ittools
