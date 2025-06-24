@@ -71,8 +71,8 @@ services:
       DATABASE_URL: postgresql://postgres:$POSTGRES_PASSWORD@postgres:5432/postgres
 
       # -- Auth --
-      ACCESS_TOKEN_SECRET: [use the command 'openssl rand base64 32' to generate a token, then copy and paste it here]
-      REFRESH_TOKEN_SECRET: [use the command 'openssl rand base64 32' to generate another token, then copy and paste it here]
+      ACCESS_TOKEN_SECRET: $ACCESS_TOKEN_SECRET
+      REFRESH_TOKEN_SECRET: $REFRESH_TOKEN_SECRET
 
       # -- Emails --
       # if you want email to work, you need to uncomment the SMTP_URL line, and replace the smtp url with the details of your email provider and account.
