@@ -1,0 +1,21 @@
+services:
+  papra:
+    image: ghcr.io/papra-hq/papra:latest-root
+    container_name: papra
+    restart: unless-stopped
+    networks:
+      - proxy
+    ports:
+      - 1221:1221
+    environment:
+      - AUTH_SECRET=<auth_secret>
+      - APP_BASE_URL=http://localhost:1221
+      - INGESTION_FOLDER_IS_ENABLED=true
+    volumes:
+      - ./app-data:/app/app-data
+      - ./ingestion:/app/ingestion
+    # user: "${UID}:${GID}"  # Rootless
+
+networks:
+  proxy:
+    external: true
