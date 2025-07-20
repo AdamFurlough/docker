@@ -45,22 +45,46 @@ services:
     extends:
       file: traefik/compose.yaml
       service: traefik
+      env_file:
+        - ./.env
 
   # Service Containers
   filebrowser:
     extends:
       file: filebrowser/compose.yaml
       service: filebrowser
+      env_file:
+        - ./.env
 
   ghostboard:
     extends:
       file: ghostboard/compose.yaml
       service: ghostboard
+      env_file:
+        - ./.env
 
   ittools:
     extends:
       file: ittools/compose.yaml
       service: ittools
+      env_file:
+        - ./.env
+
+  rxresume:
+    extends:
+      file: rxresume/compose.yaml
+      service: rxresume
+      env_file:
+        - ./.env
+        - ./rxresume/.env
+
+  papra:
+    extends:
+      file: papra/compose.yaml
+      service: papra
+      env_file:
+        - ./.env
+        - ./papra/.env
 
 # DISABLED CONTAINERS
 
