@@ -7,12 +7,11 @@ This project contains compose files and notes for docker containers I am testing
 - Git Set up completed (see readme in project root)
 - Add current user to docker group `sudo usermod -aG docker $(whoami)`
 - Reload group `newgrp docker`
-- Create docker dir and pull repo
+- Create docker dir and clone repo
 
 ```sh
-mk dir /docker
-cd /docker
-git pull https://github.com/AdamFurlough/docker.git 
+cd /
+sudo git clone https://github.com/AdamFurlough/docker.git 
 ```
 
 ## Installation
@@ -46,6 +45,13 @@ From within the dir of the container you would like to update...
 ```bash
 docker compose pull && docker compose up -d
 ```
+
+## Other Helpful Docker commands
+
+- `docker logs traefik` show logs
+- `docker compose up -d --force-recreate` good for repeat testing with changed settings
+- `docker stop $(docker ps -q)` stop all running
+- `docker exec -it traefik sh` enter container with sh, `exit`
 
 ## env file setup 
 

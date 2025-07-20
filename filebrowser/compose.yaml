@@ -1,6 +1,6 @@
 ---
 services:
-  file-browser:
+  filebrowser:
     image: filebrowser/filebrowser
     container_name: filebrowser
     user: 1000:1000
