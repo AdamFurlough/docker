@@ -1,0 +1,50 @@
+services:
+  semaphore-postgres:
+    image: postgres:14
+    hostname: postgres
+    restart: always
+    ports:
+      - '5432:5432'
+    networks:
+      - tmrwproxy
+    volumes:
+      - ${APP_DATA_PATH}/semaphore/postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+
+  semaphore-ui:
+    image: semaphoreui/semaphore:latest
+    hostname: semaphore-ui
+    restart: always
+    ports:
+      - '3000:3000'
+    networks:
+      - tmrwproxy
+    volumes:
+      - ${APP_DATA_PATH}/semaphore/data:/tmp/semaphore
+    environment:
+      SEMAPHORE_DB_USER: ${POSTGRES_USER}
+      SEMAPHORE_DB_PASS: ${POSTGRES_PASSWORD}
+      SEMAPHORE_DB_HOST: postgres
+      SEMAPHORE_DB_PORT: ${POSTGRES_DB_PORT:-5432}
+      SEMAPHORE_DB_DIALECT: postgres
+      SEMAPHORE_DB: ${POSTGRES_DB}
+      SEMAPHORE_PLAYBOOK_PATH: /tmp/semaphore/
+      SEMAPHORE_ADMIN_PASSWORD: ${SEMAPHORE_ADMIN_PASSWORD}
+      SEMAPHORE_ADMIN_NAME: ${SEMAPHORE_ADMIN_NAME}
+      SEMAPHORE_ADMIN_EMAIL: ${SEMAPHORE_ADMIN_EMAIL}
+      SEMAPHORE_ADMIN: ${SEMAPHORE_ADMIN_USER}
+    #   SEMAPHORE_EMAIL_HOST: ${SEMAPHORE_EMAIL_HOST}
+    #   SEMAPHORE_EMAIL_PORT: ${SEMAPHORE_EMAIL_PORT}
+    #   SEMAPHORE_EMAIL_SENDER: ${SEMAPHORE_EMAIL_SENDER}
+    #   SEMAPHORE_EMAIL_ALERT: ${SEMAPHORE_EMAIL_ALERT}
+    #   SEMAPHORE_EMAIL_ALERT_RECIPIENTS: ${SEMAPHORE_EMAIL_ALERT_RECIPIENTS}
+      SEMAPHORE_ACCESS_KEY_ENCRYPTION: ${SEMAPHORE_ACCESS_KEY_ENCRYPTION}
+    depends_on:
+      - semaphore-postgres
+
+networks:
+  tmrwproxy:
+    external: true
