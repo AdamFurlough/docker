@@ -11,10 +11,10 @@ services:
       - "443:443"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./traefik.yaml:/etc/traefik/traefik.yml  # config file, doublecheck file ext (yaml external yml internal)
-      - ./acme.json:/acme.json
+      - APP_DATA_PATH/traefik/traefik.yaml:/etc/traefik/traefik.yml  # config file, doublecheck file ext (yaml external yml internal)
+      - APP_DATA_PATH/traefik/acme.json:/acme.json
     environment:
-      - TZ=US/UTC  # set to local timezone
+      - TZ=${TIME_ZONE}
 
 networks:
   proxy:
