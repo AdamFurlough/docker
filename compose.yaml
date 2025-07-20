@@ -70,25 +70,24 @@ services:
       env_file:
         - ./.env
 
-  rxresume:
-    extends:
-      file: rxresume/compose.yaml
-      service: rxresume
-      env_file:
-        - ./.env
-        - ./rxresume/.env
-
-  papra:
-    extends:
-      file: papra/compose.yaml
-      service: papra
-      env_file:
-        - ./.env
-        - ./papra/.env
-
 # DISABLED CONTAINERS
 
-# Container Management
+  # rxresume:
+  #   extends:
+  #     file: rxresume/compose.yaml
+  #     service: rxresume
+  #     env_file:
+  #       - ./.env
+  #       - ./rxresume/.env
+
+  # papra:
+  #   extends:
+  #     file: papra/compose.yaml
+  #     service: papra
+  #     env_file:
+  #       - ./.env
+  #       - ./papra/.env
+
   # portainer:
   #   extends:
   #     file: portainer/compose.yaml
