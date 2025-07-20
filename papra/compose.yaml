@@ -1,3 +1,4 @@
+---
 services:
   papra:
     image: ghcr.io/papra-hq/papra:latest-root

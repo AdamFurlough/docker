@@ -6,7 +6,7 @@ services:
     ports:
       - '5432:5432'
     networks:
-      - tmrwproxy
+      - proxy
     volumes:
       - ${APP_DATA_PATH}/semaphore/postgres:/var/lib/postgresql/data
     environment:
@@ -21,7 +21,7 @@ services:
     ports:
       - '3000:3000'
     networks:
-      - tmrwproxy
+      - proxy
     volumes:
       - ${APP_DATA_PATH}/semaphore/data:/tmp/semaphore
     environment:
@@ -46,5 +46,5 @@ services:
       - semaphore-postgres
 
 networks:
-  tmrwproxy:
+  proxy:
     external: true
