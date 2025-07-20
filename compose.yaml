@@ -1,23 +1,45 @@
 ---
+
+# Reference .env files
+include:
+
+    - path: traefik/compose.yaml 
+      env_file:
+        ./.env
+        ./traefik/.env
+    - path: filebrowser/compose.yaml
+      env_file:
+        ./.env
+        ./filebrowser/.env
+    - path: ghostboard/compose.yaml
+      env_file:
+        ./.env
+        ./ghostboard/.env
+    - path: ittools/compose.yaml
+      env_file:
+        ./.env
+        ./ittools/.env
+
+  # DISABLED CONTAINERS
+    # - path: portainer/compose.yaml
+    #   env_file:
+    #     ./.env
+    #     ./portainer/.env
+
 # Create proxy network for use with traefik
 networks:
   proxy:
 
+# Define all docker containers
 services:
 
-# Proxy
+  # Proxy
   traefik:
     extends:
       file: traefik/compose.yaml
       service: traefik
 
-# Container Management
-  portainer:
-    extends:
-      file: portainer/compose.yaml
-      service: portainer
-
-# Service Containers
+  # Service Containers
   filebrowser:
     extends:
       file: filebrowser/compose.yaml
@@ -32,3 +54,11 @@ services:
     extends:
       file: ittools/compose.yaml
       service: ittools
+
+# DISABLED CONTAINERS
+
+# Container Management
+  # portainer:
+  #   extends:
+  #     file: portainer/compose.yaml
+  #     service: portainer

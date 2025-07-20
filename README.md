@@ -7,10 +7,12 @@ This project contains compose files and notes for docker containers I am testing
 - Git Set up completed (see readme in project root)
 - Add current user to docker group `sudo usermod -aG docker $(whoami)`
 - Reload group `newgrp docker`
-- From Home dir, move docker folder from git repo to operating location
+- Create docker dir and pull repo
 
-```bash
-mv ~/Git/homelab/docker ~/Docker
+```sh
+mk dir /docker
+cd /docker
+git pull https://github.com/AdamFurlough/docker.git 
 ```
 
 ## Installation
@@ -43,4 +45,44 @@ From within the dir of the container you would like to update...
 
 ```bash
 docker compose pull && docker compose up -d
+```
+
+## env file setup 
+
+In order to reference multiple env files we need to use Docker include to declare custom .env locations for specific services.
+
+For example, we have the master compose.yaml that pulls in compose.yaml for separate stacks, but it also includes the locations of .env for a couple of the services within those stacks. I was then able to use these for writing 'env_file:' within service details.
+
+Example of master compose.yaml:
+
+```yaml
+include:
+
+    - path: ./compose/stack1-compose.yaml 
+      env_file:
+        ./app1-data/.env
+        ./app2-data/.env
+    - path: ./compose/stack2-compose.yaml
+
+services:
+.
+.
+networks:
+.
+.
+```
+
+Example of child compose.yaml:
+
+```yaml
+services:
+
+  app1:
+    container_name: app1
+    env_file:
+      - ./app1-data/.env
+  app2:
+    container_name: app2
+    env_file:
+      - ./app2-data/.env
 ```
