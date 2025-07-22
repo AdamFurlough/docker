@@ -13,7 +13,7 @@ for pkg in docker docker-client docker-client-latest docker-common docker-latest
 # Add Docker's official repository
 echo "Adding Docker's official repository..."
 sudo dnf -y install dnf-plugins-core
-sudo dnf config-manager add-repo --from-repofile=https://download.docker.com/linux/fedora/docker-ce.repo
+sudo dnf config-manager addrepo --from-repofile=https://download.docker.com/linux/fedora/docker-ce.repo
 
 # Install Docker
 echo "Installing Docker..."
